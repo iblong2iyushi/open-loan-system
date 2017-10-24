@@ -1,8 +1,22 @@
-<html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>OLS</title>
 </head>
 <body>
 	<h3>Welcome to </h3><h1>Open Loan System</h1>
+	<p> To delete a loan, click <a href="http://localhost:8080/delete">here.</a></p>
+	<p> To look at all loan, click <a href="http://localhost:8080/all">here.</a></p>
+	<p> To enter a new loan, submit below. 
+	<form  action="#" th:action="@{/add}"  th:object="${loanobj}" method="POST">
+		Loan Name:
+                <p><input type="text" th:field="*{lname}"/></p>
+		Loan Vendor:
+                <p><input type="text" th:field="*{lvendor}"/></p>
+		Loan Price:
+		<p><input type="text" th:field="*{lprice}"/></p>
+		<input type="submit" value="submit"/>
+	</form>
+	</p>
 </body>
 </html>

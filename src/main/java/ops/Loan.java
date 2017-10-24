@@ -11,33 +11,35 @@ import javax.persistence.Table;
 public class Loan{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer lid;
+	private Long lid;
 	private String lname;
 	private String lvendor;
 	private Integer lprice;
 
-	public Integer getId(){
-	return lid;}
+	public Long getLid(){
+		return lid;
+	}
 
-	public void setId(Integer id){
-	this.lid = id;}
+	public void setLid(Long id){
+		this.lid = id;
+	}
 
-	public String getName(){
+	public String getLname(){
 	return lname;}
 
-	public void setName(String name){
+	public void setLname(String name){
 	this.lname = name;}
 
-	public String getVendor(){
+	public String getLvendor(){
 	return lvendor;}
 
-	public void setVendor(String vendor){
+	public void setLvendor(String vendor){
 	this.lvendor = vendor;}
 
-	public Integer getPrice(){
+	public Integer getLprice(){
 	return lprice;}
 
-	public void setPrice(Integer price){
+	public void setLprice(Integer price){
 	this.lprice = price;}
 
 }

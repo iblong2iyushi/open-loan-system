@@ -1,10 +1,14 @@
 package ops;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import ops.Loan;
 import ops.LoanRepository;
@@ -15,19 +19,27 @@ public class LoanController {
 	private LoanRepository loanRepository;
 
 	@RequestMapping("/")
-	public String display()
+	public String display(Model model)
 	{
+		model.addAttribute( "loanobj", new Loan());
 		return "home";
 	}
 
-	@RequestMapping("/add") //Map only get requests
-	public @ResponseBody String addNewLoan(){
-                Loan l = new Loan();
-                l.setName("Ayushi");
-                l.setVendor("Bajaj");
-                l.setPrice(100);
-		loanRepository.save(l);
+	@PostMapping("/add") 
+	public @ResponseBody String addNewLoan(@ModelAttribute Loan loan){
+		loanRepository.save(loan);
                 return "Saved";
+	}
+
+	@RequestMapping("/delete")
+	public @ResponseBody String deleteLoan(){
+		Loan l = loanRepository.findOne(new Long(2));
+		if (l == null){
+			return "Not found";
+		}
+		loanRepository.delete(l);
+		return "deleted";
+
 	}
 
 	@RequestMapping("/all")
